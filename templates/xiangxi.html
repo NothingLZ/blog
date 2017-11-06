@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>BLOG首页</title>
+        <link rel="stylesheet" href="/static/css/semantic.css"  media="screen" title="no title" charset="utf-8">
+        <link href="https://fonts.googleapis.com/css?family=Oswald|Raleway" rel="stylesheet">
+
+
+        <style type="text/css">
+            h1 {
+                font-family:'Oswald', sans-serif!important;
+                font-size:40px;
+            }
+
+            body {
+                font-family: 'Raleway', sans-serif;
+            }
+            p {
+                font-family: 'Raleway', sans-serif;
+                font-size:18px;
+            }
+            .ui.vertical.segment.masthead {
+                height: 280px;
+                background: url("/static/images/star_banner.jpg");
+                background-size: cover;
+                background-position: 100% 80%;
+            }
+
+            .ui.container.segment {
+                width: 800px;
+            }
+
+            .ui.center.aligned.header.blogslogon {
+                margin-top: 40px;
+            }
+
+            .ui.center.aligned.header.blogslogon p {
+                margin-top: 10px;
+                color: white;
+                font-size: 10px;
+            }
+            .ui.container.nav {
+                width: 500px;
+            }
+            .span_userinfo{
+                float:right;
+                font-size:17px;
+                font-family:'Raleway',sans-serif!important;
+            }
+
+        </style>
+    </head>
+    <body>
+
+
+        <div class="ui inverted vertical  segment masthead">
+            <span class="span_userinfo">
+                {% if user is None %}
+                    [<a href="/web/login/" >登录</a>/<a href="/web/signup/">注册</a>]
+                {% else %}
+                    [<a href="/web/home/">{{ user }}</a>/<a href="/web/logout/">登出</a>]
+                {% endif %}
+            </span>
+
+            <h1 class="ui center aligned header blogslogon" style="font-size:50px;font-family: 'Raleway', sans-serif!important;">
+                Bloger
+                <p class="ui sub header">
+                    everyone has a story to tell
+                </p>
+
+            </h1>
+        </div>
+        <div class="ui container nav">
+            <div class="ui borderless text three item menu ">
+                <div class="ui simple dropdown  item">
+                    Categories
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        {% for row in categorylist %}
+                        <a class="item" target="_blank" href="/web/xiangxi/?nid={{ row.id }}">{{ row }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a class="item">
+                    Popular
+                </a>
+                <a class="item">
+                    About
+                </a>
+
+            </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="ui  vertical segment">
+            {% for row in article_list %}
+                 <div class="ui container vertical segment">
+                    <a href="#">
+                        <h1 class="ui header">
+                            {{ row.title }}
+                        </h1>
+                    </a>
+
+                    <i class="icon grey small history"></i>{{ row.create_time }}
+
+                    <p>
+                        {{ row.content|truncatewords:100 }}
+                        <a href="#">
+                            <a class="angle tiny double grey right icon">READMORE</a>
+                        </a>
+
+                    </p>
+
+                    <div class="ui mini  tag label">
+                        {{ row.category }}
+                    </div>
+                     <i class="icon grey small user"></i>{{ row.author}}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="ui inverted  vertical very padded  segment">
+            DEMO®
+        </div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>欢迎注册blog</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/edmure.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/account.css"/>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="register">
+    <div style="font-size: 25px; font-weight: bold;text-align: center;">
+        用户注册
+    </div>
+    <form action="/web/signup/" method="post">
+
+        <div>
+            <label>用户名</label>
+            <input type="text" class="form-control" name="username" placeholder="请输入用户名">{{ erro }}{{ obj.errors.username.0}}
+        </div>
+        <div >
+            <label>邮箱</label>
+            <input type="email" class="form-control" name="email" placeholder="请输入邮箱">{{ obj.errors.email.0}}
+        </div>
+        <div>
+            <label >密码</label>
+            <input type="password" class="form-control" name="password" placeholder="请输入密码">{{ obj.errors.password.0}}
+        </div>
+        <div class="form-group">
+            <label>确认密码</label>
+            <input type="password" class="form-control" name="confirm_password" placeholder="请重新输入密码">{{erro1}}
+        </div>
+        <div><input type="submit" class="btn btn-default" value="下一步"/>
+            {% csrf_token  %}
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
